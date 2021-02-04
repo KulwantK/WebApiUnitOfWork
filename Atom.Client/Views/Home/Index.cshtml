@@ -1,0 +1,61 @@
+﻿@model Atom.Client.Models.ViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container d-flex justify-content-center">
+    
+    <div class=" card">
+        <div class="card-body" style="width: 40rem">
+            <form asp-controller="home">
+                <div class="form-group row ">
+                    <div class="col-sm text-right">
+                        <label class="col-form-label">
+                        <strong>
+                            @if (Model.ShowBalance)
+                            {
+                               @Model.Currency @Model.Balance;
+                            } 
+                        </strong>
+                        </label>
+                        <button asp-action="Balance" type="submit" class="btn btn-primary">View Balance </button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-5 col-form-label">Account Number</label>
+                    <div class="col-sm">
+                        <input asp-for="@Model.AccountNumber" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-5 col-form-label">Amount</label>
+                    <div class="col-sm">
+                        <input type="text" asp-for="@Model.Amount" value="@Model.Amount" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm text-right">
+                        <button asp-action="deposit" type="submit" class="btn btn-primary">Deposit</button>
+                        <button asp-action="widthdraw" type="submit" class="btn btn-primary">Widthdraw</button>
+                    </div>
+                </div>
+                <div class="form-group row ">
+                    <div class="col-sm">
+                        <label class="col-form-label">
+                            <strong>
+                                @if (Model.Successful)
+                                {
+                                    <span style="color:green">@Model.Message</span>
+                                }
+                                else
+                                {
+                                    <span style="color:red">@Model.Message</span>
+                                }
+                            </strong>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
