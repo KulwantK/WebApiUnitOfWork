@@ -67,7 +67,7 @@ namespace Atom.ApiService.Service
             {
                 accountResponse.AccountNumber = accountDto.AccountNumber;
                 accountResponse.Successful = false;                
-                accountResponse.Message = "unable to process your request now.Please try again after sometime";
+                accountResponse.Message = $"invalid account {ex.Message}";
             }
             return accountResponse;
         }

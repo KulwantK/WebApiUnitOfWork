@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Atom.Data
 {
-    public class Repository<T> : IRepository<T> where T:class,IEntity
+    public class Repository<T> : IRepository<T> where T : class, IEntity
     {
-        public DbSet<T> Table{ get; set; }
+        public DbSet<T> Table { get; set; }
         public Repository(AtomDbContext atomDbContext)
         {
             Table = atomDbContext.Set<T>();
@@ -27,7 +27,7 @@ namespace Atom.Data
 
         public async Task<IList<T>> All()
         {
-           return await Table.AsNoTracking().ToListAsync();
+            return await Table.AsNoTracking().ToListAsync();
         }
         public async Task<T> GetById(long id)
         {
@@ -37,20 +37,13 @@ namespace Atom.Data
         public async Task<IEnumerable<T>> Where(Expression<Func<T, bool>> expression)
         {
             IQueryable<T> query = Table;
-            query = query.Where(expression);/*.AsNoTracking();*/
+            query = query.Where(expression);
 
             return await query.ToListAsync().ConfigureAwait(false);
         }
         public void Update(T entity)
         {
-            try
-            {
-                Table.Update(entity);
-            }
-            catch(DbUpdateConcurrencyException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            Table.Update(entity);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Atom.Client.Service
         }
         public async Task<ViewModel> Balance(long id)
         {
-            var httpResponse = await httpClientService.Get<RequestResponseModel>("AtomTransaction/1");
+            var httpResponse = await httpClientService.Get<RequestResponseModel>($"AtomTransaction/{id}");
             if(httpResponse.IsSuccessStatusCode)
             {
                 var httpResult = JsonConvert.DeserializeObject<RequestResponseModel>(await httpResponse.Content.ReadAsStringAsync());

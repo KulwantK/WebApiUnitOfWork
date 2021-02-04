@@ -18,7 +18,7 @@ namespace Atom.Client.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _service.Balance(1);
+            var model = await _service.Balance(2);
             ViewModel viewModel = new ViewModel { AccountNumber = model.AccountNumber };
             return View(viewModel);
         }
